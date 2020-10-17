@@ -22,7 +22,7 @@ export const useForm = (
   };
 
   const handleChange = useCallback(event => {
-    const { name, value } = event.target;
+    const { name, value } = event.currentTarget;
 
     validateValue(validationOptions[name], value, validationError => {
       changeState(name, value, validationError ? `${ name } ${ validationError }` : '');
