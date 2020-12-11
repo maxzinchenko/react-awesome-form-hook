@@ -2,6 +2,8 @@ const isObject = value => typeof value === 'object';
 const isRegExp = value => value instanceof RegExp;
 
 export const validateValue = (options, value, callback) => {
+  if (!options) return callback('');
+
   const { required, pattern, validate, min, max } = options;
 
   if (required && !value) {

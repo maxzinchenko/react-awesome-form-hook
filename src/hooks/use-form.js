@@ -2,7 +2,7 @@ import { useState, useCallback } from 'react';
 
 import { validateValue } from '../services/validation';
 
-export const useForm = (initialState, submitCallback, validationOptions) => {
+export const useForm = (initialState, validationOptions, submitCallback) => {
   const [state, setState] = useState(initialState);
 
   const changeState = (name, value, error) => {
