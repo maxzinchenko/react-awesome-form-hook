@@ -5,15 +5,15 @@ import { validateValue } from '../services/validation';
 export const useForm = (initialState, submitCallback, validationOptions) => {
   const [state, setState] = useState(initialState);
 
-  const changeState = (name, value, valueError) => {
-    setState((prevState) => ({ ...prevState, [name]: { value, error: valueError } }));
+  const changeState = (name, value, error) => {
+    setState((prevState) => ({ ...prevState, [name]: { value, error } }));
   };
 
   const handleChange = useCallback(event => {
     const { name, value } = event.currentTarget;
 
-    return validateValue(validationOptions[name], value, validationError => {
-      changeState(name, value, validationError);
+    return validateValue(validationOptions[name], value, error => {
+      changeState(name, value, error);
     });
   }, [setState]);
 
