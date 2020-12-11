@@ -1,7 +1,8 @@
 const isObject = value => typeof value === 'object';
+const isRegExp = value => value instanceof RegExp;
 
 export const validateValue = (options, value, callback) => {
-  const { required, pattern, validate, minLength, maxLength } = options;
+  const { required, pattern, validate, min, max } = options;
 
   if (required && !value) {
     if (isObject(required)) {
@@ -12,38 +13,56 @@ export const validateValue = (options, value, callback) => {
   }
 
   if (pattern) {
-    if (isObject(pattern)) {
+    if (isObject(pattern) && !isRegExp(pattern)) {
       if (!pattern.value.test(value)) {
         return callback(pattern.message);
       }
     }
 
-    return !pattern.test(value) && callback('invalid');
+    if (isRegExp(pattern) && !pattern.test(value)) {
+      return callback('invalid');
+    }
   }
 
-  if (validate && !validate.check(value)) {
-    return callback(validate.message);
+  if (validate) {
+    if (isObject(validate)) {
+      if (!validate.value(value)) {
+        return callback(validate.message);
+      }
+    } else {
+      if (!validate(value)) {
+        return callback('invalid');
+      }
+    }
   }
 
-  if (minLength) {
-    if (isObject(minLength)) {
-      if (value.length < minLength.value) {
-        return callback(minLength.message);
+  if (min) {
+    if (isObject(min)) {
+      if (value.length < min.value) {
+        return callback(min.message);
       }
     }
 
-    return value.length < minLength && callback(`cannot be shorter than ${ minLength } characters`);
+    if (value.length < min) {
+      return callback('too short');
+    }
   }
 
-  if (maxLength) {
-    if (isObject(maxLength)) {
-      if (value.length > maxLength.value) {
-        return callback(maxLength.message);
+  if (max) {
+    if (isObject(max)) {
+      if (value.length > max.value) {
+        return callback(max.message);
       }
     }
 
-    return value.length > maxLength && callback(`cannot be longer than ${ maxLength } characters`);
+    if (value.length > max) {
+      return callback('too long');
+    }
   }
 
-  return callback(null);
+  if (!value.trim()) {
+    return callback('invalid');
+  }
+
+  return callback('');
 };
