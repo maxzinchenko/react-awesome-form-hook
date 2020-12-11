@@ -54,6 +54,7 @@ module.exports = {
     complexity: OFF,
     'default-case': OFF,
     'guard-for-in': OFF,
+    'global-require': OFF,
     'no-caller': ERROR,
     'no-div-regex': ERROR,
     'no-else-return': OFF,
