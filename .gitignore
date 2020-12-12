@@ -17,3 +17,6 @@ coverage
 # IDE's
 .idea
 .vscode
+
+# TODO add types
+index.d.ts
