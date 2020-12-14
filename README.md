@@ -77,13 +77,13 @@ export const MyFormComponent = () => {
         value={state.firstName.value}
         onChange={handleChange}
       />
-      {state.firstName.error && <small>{ state.firstName.error }</small>}
+      {state.firstName.error && <small>{state.firstName.error}</small>}
       <input
         name="lastName"
         value={state.lastName.value}
         onChange={handleChange}
       />
-      {state.lastName.error && <small>{ state.lastName.error }</small>}
+      {state.lastName.error && <small>{state.lastName.error}</small>}
       <button onClick={handleSubmit} disabled={isSubmitDisabled()}>
         submit
       </button>
