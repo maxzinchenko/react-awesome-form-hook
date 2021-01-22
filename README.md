@@ -14,7 +14,7 @@ yarn add react-awesome-form-hook
 
 ## Example of Options
 ```ts
-type CustomOptions = {
+type CustomInputOptions = {
   // required
   required: {
     value: boolean
@@ -42,7 +42,7 @@ type CustomOptions = {
   }
 }
 
-type Options = {
+type InputOptions = {
   // required
   required: boolean,
   // max length
@@ -53,6 +53,11 @@ type Options = {
   pattern: RegExp,
   // custom function
   validate: (value: string) => boolean
+}
+
+type ValidationOptions {
+  firstName: CustomInputOptions,
+  lastName: InputOptions
 }
 ```
 
