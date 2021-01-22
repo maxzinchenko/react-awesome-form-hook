@@ -12,7 +12,51 @@ npm install react-awesome-form-hook
 yarn add react-awesome-form-hook
 ```
 
-## Example Usage
+## Example of Options
+```ts
+type CustomOptions = {
+  // required
+  required: {
+    value: boolean
+    message: string
+  },
+  // max length
+  max: {
+    value: number,
+    message: string
+  },
+  // min length
+  min: {
+    value: number,
+    message: string
+  },
+  // pattern
+  pattern: {
+    value: RegExp,
+    message: string
+  },
+  // custom function
+  validate: {
+    value: (value: string) => boolean,
+    message: string
+  }
+}
+
+type Options = {
+  // required
+  required: boolean,
+  // max length
+  max: number,
+  // min length
+  min: number,
+  // pattern
+  pattern: RegExp,
+  // custom function
+  validate: (value: string) => boolean
+}
+```
+
+## Example of Usage
 
 ```js
 import React from 'react';
