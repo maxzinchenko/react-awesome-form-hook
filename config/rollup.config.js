@@ -1,47 +1,57 @@
 import babel from 'rollup-plugin-babel';
-import size from 'rollup-plugin-size';
-import externalDeps from 'rollup-plugin-peer-deps-external';
 import replace from '@rollup/plugin-replace';
+import resolve from 'rollup-plugin-node-resolve';
+import commonJS from 'rollup-plugin-commonjs';
+import externalDeps from 'rollup-plugin-peer-deps-external';
+import size from 'rollup-plugin-size';
 import { terser } from 'rollup-plugin-terser';
 
+const PRODUCTION = !process.env.npm_lifecycle_script.includes('--watch');
+
+const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'];
+
+const input = 'src/index.ts';
 const external = ['react'];
 
-const commonOutput = {
+const output = {
   name: 'ReactAwesomeFormHook',
   format: 'umd',
-  sourcemap: true,
+  sourcemap: !PRODUCTION,
   globals: {
     react: 'React'
   }
 };
 
-const commonPlugins = [
-  babel(),
+const plugins = [
+  resolve({ extensions }),
+  babel({ extensions, runtimeHelpers: true }),
+  commonJS(),
   externalDeps()
 ];
 
-export default [{
-  input: 'src/index.js',
+const configDevelopment = {
+  input,
   output: {
-    ...commonOutput,
+    ...output,
     file: 'dist/react-awesome-form-hook.development.js'
   },
   external,
-  plugins: [
-    ...commonPlugins,
-    replace({ 'process.env.NODE_ENV': 'development', delimiters: ['', ''] })
-  ]
-}, {
-  input: 'src/index.js',
+  plugins
+};
+
+const configProduction = {
+  input,
   output: {
-    commonOutput,
+    ...output,
     file: 'dist/react-awesome-form-hook.production.min.js'
   },
   external,
   plugins: [
-    ...commonPlugins,
-    replace({ 'process.env.NODE_ENV': 'production', delimiters: ['', ''] }),
+    ...plugins,
+    replace({ 'process.env.NODE_ENV': '"production"', delimiters: ['', ''] }),
     terser(),
     size({ writeFile: false })
   ]
-}];
+};
+
+export default [configDevelopment, configProduction];

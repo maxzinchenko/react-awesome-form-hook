@@ -3,11 +3,15 @@ const WARNING = 1;
 const ERROR = 2;
 
 module.exports = {
-  parser: 'babel-eslint',
+  parser: '@typescript-eslint/parser',
 
   parserOptions: {
-    ecmaVersion: 11,
-    sourceType: 'module'
+    ecmaVersion: 2020,
+    sourceType: 'module',
+    project: ['./tsconfig.json'],
+    ecmaFeatures: {
+      jsx: true
+    }
   },
 
   extends: [
@@ -41,7 +45,7 @@ module.exports = {
     },
     'import/resolver': {
       node: {
-        extensions: ['.js', '.jsx']
+        extensions: ['.ts', '.tsx']
       }
     }
   },
