@@ -2,6 +2,12 @@
 
 The hook makes form usage much easier
 
+<a href="https://npmjs.com/package/react-awesome-form-hook" target="\_parent">
+  <img alt="npm version" src="https://img.shields.io/npm/v/react-awesome-form-hook.svg" />
+</a><a href="https://npmjs.com/package/react-awesome-form-hook" target="\_parent">
+  <img alt="npm downloads" src="https://img.shields.io/npm/dm/react-awesome-form-hook.svg" />
+</a>
+
 ## Installation
 
 ```
