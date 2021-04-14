@@ -1,17 +1,9 @@
-import React, { useState, useCallback, useMemo, memo, FormEvent, ChangeEvent, InputHTMLAttributes, FormHTMLAttributes, FC } from 'react';
+import { useState, useCallback, useMemo, ChangeEvent } from 'react';
 
 import { State, Options, StateValue } from '../types';
 import { validateValue } from '../services/validation';
 
 type Values<T> = Record<keyof T, string | null>;
-
-interface AwesomeInputProps<T> extends InputHTMLAttributes<HTMLElement> {
-  name: keyof T & string;
-}
-
-interface AwesomeFormProps<T> extends FormHTMLAttributes<HTMLElement> {
-  handleSubmit: (event: FormEvent<HTMLFormElement>, data: Values<T>) => void;
-}
 
 export const useForm = <S extends State>(initialState: S, validationOptions: Options<S>) => {
   const [state, setState] = useState(initialState);
@@ -40,21 +32,10 @@ export const useForm = <S extends State>(initialState: S, validationOptions: Opt
     });
   }, []);
 
-  const Input = memo<AwesomeInputProps<S>>(props => (
-    <input { ...props } onChange={ handleChange }/>
-  ));
-
-  const Form: FC<AwesomeFormProps<S>> = (({ children, ...props }) => (
-    <form { ...props } onSubmit={ event => props.handleSubmit(event, getValues(state, 'value')) }>
-      { children }
-    </form>
-  ));
-
   return {
     state,
     disabled,
     getValues,
-    Input,
-    Form
+    handleChange
   };
 };

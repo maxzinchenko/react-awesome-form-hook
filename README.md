@@ -110,10 +110,12 @@ const initialState = {
 };
 
 export const MyFormComponent = () => {
-  const { state, disabled, Form, Input } = useForm(initialState, validationOptions);
+  const { state, disabled, getValues, handleChange } = useForm(initialState, validationOptions);
 
-  const handleSubmit = (event, data) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
+
+    const data = getValues('value');
 
     console.log(data);
     // the log result  below
@@ -124,15 +126,17 @@ export const MyFormComponent = () => {
   };
 
   return (
-    <Form handleSubmit={handleSubmit}>
-      <Input
+    <form onSubmit={handleSubmit}>
+      <input
         name="firstName"
         value={state.firstName.value}
+        onChange={handleChange}
       />
       {state.firstName.error && <small>{state.firstName.error}</small>}
-      <Input
+      <input
         name="lastName"
         value={state.lastName.value}
+        onChange={handleChange}
       />
       {state.lastName.error && <small>{state.lastName.error}</small>}
       <button
