@@ -1,10 +1,10 @@
-import babel from 'rollup-plugin-babel';
 import replace from '@rollup/plugin-replace';
 import resolve from 'rollup-plugin-node-resolve';
 import commonJS from 'rollup-plugin-commonjs';
 import externalDeps from 'rollup-plugin-peer-deps-external';
 import size from 'rollup-plugin-size';
 import { terser } from 'rollup-plugin-terser';
+import typescript from '@rollup/plugin-typescript';
 
 const PRODUCTION = !process.env.npm_lifecycle_script.includes('--watch');
 
@@ -24,7 +24,7 @@ const output = {
 
 const plugins = [
   resolve({ extensions }),
-  babel({ extensions, runtimeHelpers: true }),
+  typescript(),
   commonJS(),
   externalDeps()
 ];

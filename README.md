@@ -110,32 +110,37 @@ const initialState = {
 };
 
 export const MyFormComponent = () => {
-  const formData = useForm(initialState, validationOptions, (event, data) => handleSubmitForm(event, data));
-  const { state, handleChange, handleSubmit, isSubmitDisabled } = formData;  
+  const { state, disabled, Form, Input } = useForm(initialState, validationOptions);
 
-  const handleSubmitForm = (event, data) => {
+  const handleSubmit = (event, data) => {
     event.preventDefault();
 
     console.log(data);
+    // the log result  below
+    // {
+    //    firstName: string;
+    //    lastName: string;
+    // }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
+    <Form onSubmit={handleSubmit}>
+      <Input
         name="firstName"
         value={state.firstName.value}
-        onChange={handleChange}
       />
       {state.firstName.error && <small>{state.firstName.error}</small>}
-      <input
+      <Input
         name="lastName"
         value={state.lastName.value}
-        onChange={handleChange}
       />
       {state.lastName.error && <small>{state.lastName.error}</small>}
-      <button onClick={handleSubmit} disabled={isSubmitDisabled()}>
-        submit
+      <button
+        disabled={disabled}
+        type="submit"
+      >
+        Submit
       </button>
-    </form>
+    </Form>
   );
 };
