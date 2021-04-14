@@ -124,7 +124,7 @@ export const MyFormComponent = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form handleSubmit={handleSubmit}>
       <Input
         name="firstName"
         value={state.firstName.value}
