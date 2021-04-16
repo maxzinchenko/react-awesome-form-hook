@@ -52,12 +52,12 @@ export const validateValue = (option: OptionValue, value: string, callback: Call
   }
 
   if (validate) {
-    if (typeof validate === 'object' && !validate.value(value)) {
+    if (typeof validate === 'object' && validate.value(value)) {
       callback(validate.message);
       return;
     }
 
-    if (typeof validate === 'function' && !validate(value)) {
+    if (typeof validate === 'function' && validate(value)) {
       callback('invalid');
       return;
     }
