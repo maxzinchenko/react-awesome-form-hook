@@ -1,6 +1,6 @@
 {
   "name": "react-awesome-form-hook",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "This hook makes form usage much easier",
   "author": {
     "name": "Max Zinchenko",
@@ -18,9 +18,16 @@
     "validation",
     "hook"
   ],
-  "main": "src/index.ts",
+  "main": "dist/react-awesome-form-hook.production.min.js",
+  "unpkg": "dist/react-awesome-form-hook.development.js",
+  "types": "typedef/index.d.ts",
+  "module": "es/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rimraf dist && cross-env NODE_ENV=production rollup -c config/rollup.config.js",
+    "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c config/rollup.config.js",
+    "build:typedef": "rimraf ./typedef && tsc --project ./tsconfig.types.json",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -29,12 +36,6 @@
       "pre-commit": "yarn lint"
     }
   },
-  "files": [
-    "CHANGELOG.md",
-    "src/**/*.js",
-    "dist",
-    "README.md"
-  ],
   "browserslist": {
     "production": [
       ">0.2%",
@@ -52,6 +53,7 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "@babel/cli": "7.13.14",
     "@rollup/plugin-replace": "2.3.4",
     "@rollup/plugin-typescript": "8.2.1",
     "@types/react": "16.9.49",
@@ -72,6 +74,7 @@
     "rollup": "2.34.2",
     "rollup-plugin-babel": "4.4.0",
     "rollup-plugin-commonjs": "10.1.0",
+    "rollup-plugin-dts": "3.0.1",
     "rollup-plugin-node-resolve": "5.2.0",
     "rollup-plugin-peer-deps-external": "2.2.4",
     "rollup-plugin-size": "0.2.2",

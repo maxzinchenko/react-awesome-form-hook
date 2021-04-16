@@ -6,8 +6,6 @@ import size from 'rollup-plugin-size';
 import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 
-const PRODUCTION = !process.env.npm_lifecycle_script.includes('--watch');
-
 const extensions = ['.js', '.jsx', '.es6', '.es', '.mjs', '.ts', '.tsx'];
 
 const input = 'src/index.ts';
@@ -16,7 +14,7 @@ const external = ['react'];
 const output = {
   name: 'ReactAwesomeFormHook',
   format: 'umd',
-  sourcemap: !PRODUCTION,
+  sourcemap: true,
   globals: {
     react: 'React'
   }

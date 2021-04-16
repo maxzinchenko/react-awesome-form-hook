@@ -3,8 +3,9 @@ node_modules
 /.pnp
 .pnp.js
 
-# Production build
+# Production builds
 dist
+typedef
 
 # Logs
 npm-debug.log*
