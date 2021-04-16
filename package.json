@@ -23,7 +23,8 @@
   "types": "typedef/index.d.ts",
   "module": "es/index.js",
   "files": [
-    "dist"
+    "dist",
+    "typedef"
   ],
   "scripts": {
     "build": "rimraf ./dist && cross-env NODE_ENV=production rollup -c config/rollup.config.js",
