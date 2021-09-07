@@ -1,6 +1,6 @@
 # React Awesome Form Hook
 
-The hook makes form usage much easier
+This hook makes form usage much easier
 
 <a href="https://npmjs.com/package/react-awesome-form-hook" target="\_parent">
   <img alt="npm version" src="https://img.shields.io/npm/v/react-awesome-form-hook.svg" />
