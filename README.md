@@ -9,9 +9,6 @@ This hook makes form usage much easier
 </a>
 
 
-
-
-
 ## Installation
 
 ```
