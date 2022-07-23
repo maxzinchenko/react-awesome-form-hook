@@ -18,6 +18,7 @@ npm install react-awesome-form-hook
 yarn add react-awesome-form-hook
 ```
 
+
 ## [Example of Usage](https://github.com/maxzinchenko/react-awesome-form-hook/blob/master/example/src/App.tsx)
 
 ## Example of Options (in types)
